@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: shopnext-db
+    environment:
+      POSTGRES_USER: shopnext
+      POSTGRES_PASSWORD: shopnext
+      POSTGRES_DB: shopnext
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shopnext"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: shopnext-backend
+    ports:
+      - "3001:3001"
+    environment:
+      DATABASE_URL: postgresql://shopnext:shopnext@postgres:5432/shopnext
+      JWT_SECRET: dev-jwt-secret
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/src:/app/src
+
+volumes:
+  pgdata:
