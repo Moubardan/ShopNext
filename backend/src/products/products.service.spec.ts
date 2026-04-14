@@ -71,7 +71,7 @@ describe('ProductsService', () => {
     mockRepo.findOne.mockResolvedValue(product);
     mockRepo.remove.mockResolvedValue(product);
 
-    const result = await service.remove(1);
+    await service.remove(1);
     expect(mockRepo.remove).toHaveBeenCalledWith(product);
   });
 });
