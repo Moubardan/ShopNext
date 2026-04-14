@@ -63,6 +63,11 @@
             "**/*.(service|guard|strategy).ts"
         ],
         "coverageDirectory": "../coverage",
+        "coverageReporters": [
+            "text",
+            "lcov",
+            "json-summary"
+        ],
         "testEnvironment": "node"
     }
 }
