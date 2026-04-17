@@ -27,7 +27,7 @@ async function seed() {
     console.log('Admin user created: admin@shopnext.com / admin123');
   }
 
-  // Create sample products
+  // Create sample products only if table is empty
   const count = await productRepo.count();
   if (count === 0) {
     await productRepo.save([
