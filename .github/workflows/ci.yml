@@ -49,8 +49,6 @@ jobs:
       - run: yarn install --frozen-lockfile --network-timeout 300000
       - run: yarn lint
       - run: yarn build
-        env:
-          NEXT_PUBLIC_API_URL: http://localhost:3001
 
   deploy-backend:
     name: Deploy Backend (Railway)
