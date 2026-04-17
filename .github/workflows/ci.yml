@@ -54,7 +54,7 @@ jobs:
     name: Deploy Backend (Railway)
     needs: backend-lint-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment: prod
     steps:
       - uses: actions/checkout@v4
@@ -72,7 +72,7 @@ jobs:
     name: Deploy Frontend (Vercel)
     needs: frontend-lint-build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment: prod
     steps:
       - uses: actions/checkout@v4
