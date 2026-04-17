@@ -8,7 +8,7 @@ import { RootState } from '@/store/store';
 import { clearCart } from '@/store/cartSlice';
 import Link from 'next/link';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function CheckoutPage() {
     const { data: session } = useSession();
