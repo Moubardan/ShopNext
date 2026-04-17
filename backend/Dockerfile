@@ -5,4 +5,4 @@ COPY . .
 RUN yarn install
 RUN yarn build
 EXPOSE 3001
-CMD ["node", "dist/main"]
+CMD ["sh", "start.sh"]
