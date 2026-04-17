@@ -58,15 +58,27 @@ jobs:
     environment: prod
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+
       - name: Install Railway CLI
-        run: npm install -g @railway/cli
-      - name: Deploy to Railway
-        run: cd backend && railway up --service ${{ secrets.RAILWAY_SERVICE_ID }}
+        run: npm install -g @railway/cli@latest
+
+      - name: Verify Railway authentication
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway whoami
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          cd backend
+          railway up \
+            --project=${{ secrets.RAILWAY_PROJECT_ID }} \
+            --service=${{ secrets.RAILWAY_SERVICE_ID }}
 
   deploy-frontend:
     name: Deploy Frontend (Vercel)
