@@ -3,6 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const SECRET = process.env.AUTH_SECRET;
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -71,4 +72,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: '/login',
   },
+  secret: SECRET,
 });
